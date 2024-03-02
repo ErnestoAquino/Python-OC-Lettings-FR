@@ -4,5 +4,3 @@ venv
 env/
 .idea/
 .DS_Store
-oc-lettings-site.sqlite3
-
