@@ -1,3 +1,13 @@
+"""
+Defines two models, Address and Letting, for managing physical addresses and property lettings.
+
+Models: - Address: Represents a physical address with street number, street name, city, state,
+ZIP code, and country code.
+- Letting: Represents a property available for rent, storing details such as title and address.
+
+"""
+
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
 

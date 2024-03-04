@@ -1,3 +1,16 @@
+"""
+This module contains views for the profiles application.
+
+It provides views to display a list of all profiles on the index page and to show the details
+of a specific profile selected by the user. The view functions use the Profile model to retrieve
+information from the database and pass it to the corresponding templates for presentation.
+
+Functions:
+    - index(request): Displays the index page with a list of all profiles.
+    - profile(request, username): Displays the details of a specific profile.
+"""
+
+
 from django.shortcuts import render
 from .models import Profile
 

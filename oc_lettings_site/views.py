@@ -1,3 +1,10 @@
+"""
+This module contains a view to render the home page.
+
+Function:
+    - index(request): Renders the home page.
+"""
+
 from django.shortcuts import render
 
 

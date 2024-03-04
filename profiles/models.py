@@ -1,3 +1,12 @@
+"""
+Defines the Profile model for managing user profiles.
+
+Model:
+    - Profile: Represents a user profile containing additional information such as the associated
+    user and favorite city.
+
+"""
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -9,10 +18,10 @@ class Profile(models.Model):
     Stores details such as the associated user, and favorite city.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Associated user
-    favorite_city = models.CharField(max_length=64, blank=True)   # Favorite city of the user
+    favorite_city = models.CharField(max_length=64, blank=True)  # Favorite city of the user
 
     class Meta:
-        verbose_name_plural = "Profiles"   # Plural name for the model in the admin interface
+        verbose_name_plural = "Profiles"  # Plural name for the model in the admin interface
 
     def __str__(self):
         """

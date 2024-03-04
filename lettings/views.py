@@ -1,3 +1,16 @@
+"""
+This module contains views for the lettings application.
+
+It provides views to display a list of all available lettings on the index page and to show the
+details of a specific letting selected by the user. The view functions use the Letting model to
+retrieve information from the database and pass it to the corresponding templates for presentation.
+
+Functions:
+    - index(request): Displays the index page with a list of all lettings.
+    - letting(request, letting_id): Displays the details of a specific letting.
+"""
+
+
 from django.shortcuts import render
 from .models import Letting
 
