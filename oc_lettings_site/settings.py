@@ -1,7 +1,6 @@
 import os
 
 from pathlib import Path
-from django.urls import path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -114,4 +113,4 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static",]
+STATICFILES_DIRS = [BASE_DIR / "static", ]
