@@ -3,26 +3,40 @@ from django.core.validators import MaxValueValidator, MinLengthValidator
 
 
 class Address(models.Model):
-    number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
-    street = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
+    """
+    Represents a physical address.
+    Stores details such as street number, street name, city, state, ZIP code, and country code.
+    """
+    number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])   # Street number
+    street = models.CharField(max_length=64)  # Street name
+    city = models.CharField(max_length=64)  # City
     state = models.CharField(max_length=2, validators=[MinLengthValidator(2)])
     zip_code = models.PositiveIntegerField(validators=[MaxValueValidator(99999)])
     country_iso_code = models.CharField(max_length=3, validators=[MinLengthValidator(3)])
 
     class Meta:
-        verbose_name_plural = "Addresses"
+        verbose_name_plural = "Addresses"  # Plural name for the model in the admin interface
 
     def __str__(self):
-        return f'{self.number} {self.street}'
+        """
+        Returns a string representation of the address.
+        """
+        return f'{self.number} {self.street}'  # Concatenated street number and name
 
 
 class Letting(models.Model):
-    title = models.CharField(max_length=256)
-    address = models.OneToOneField(Address, on_delete=models.CASCADE)
+    """
+    Represents a property available for rent.
+    Stores details such as title and address.
+    """
+    title = models.CharField(max_length=256)  # Title of the letting
+    address = models.OneToOneField(Address, on_delete=models.CASCADE)   # Address of the letting
 
     class Meta:
-        verbose_name_plural = "Lettings"
+        verbose_name_plural = "Lettings"  # Plural name for the model in the admin interface
 
     def __str__(self):
-        return self.title
+        """
+        Returns a string representation of the letting.
+        """
+        return self.title  # Title of the letting
