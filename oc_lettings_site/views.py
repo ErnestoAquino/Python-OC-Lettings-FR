@@ -8,4 +8,13 @@ from django.shortcuts import render
 # vitae erat ac orci placerat luctus. Nullam elementum urna nisi, pellentesque iaculis enim
 # cursus in. Praesent volutpat porttitor magna, non finibus neque cursus id.
 def index(request):
+    """
+    Renders the home page.
+
+    Parameters:
+    - request: The HTTP request received by the server.
+
+    Returns:
+    - An HTTP response rendering the 'index.html' template.
+    """
     return render(request, 'index.html')
