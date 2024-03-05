@@ -12,6 +12,7 @@ Functions:
 
 
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from .models import Profile
 
 
@@ -60,8 +61,8 @@ def profile(request, username):
     Returns:
         HttpResponse: The rendered profile page with detailed profile information.
     """
-    # Retrieve the profile object based on the provided username
-    profile_instance = Profile.objects.get(user__username=username)
+    # Using 'get_object_or_404' to automatically handle the case of profile is not found
+    profile_instance = get_object_or_404(Profile, user__username=username)
 
     # Prepare context data with the profile instance
     context = {'profile': profile_instance}
