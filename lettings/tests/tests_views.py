@@ -1,5 +1,7 @@
 import pytest
 from django.urls import reverse
+from django.db.utils import OperationalError
+
 from lettings.models import Address
 from lettings.models import Letting
 
@@ -92,6 +94,23 @@ def test_index_view_contains_three_lettings(client):
     for title in titles:
         expected_string = f'>{title}</a>'
         assert expected_string in response.content.decode()
+
+
+@pytest.mark.django_db
+def test_lettings_index_view_database_error(mocker, client):
+    """
+    Test that the letting index view returns a server error response when a database error occurs
+    """
+
+    # 'Mock' the 'all()' method
+    mocker.patch.object(Letting.objects, 'all', side_effect=OperationalError)
+
+    # Make a GET request to the 'index'
+    url = reverse('lettings:index')
+    response = client.get(url)
+
+    # Check that the server error response is returned
+    assert response.status_code == 500
 
 
 @pytest.mark.django_db
