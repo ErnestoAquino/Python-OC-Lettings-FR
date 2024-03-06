@@ -10,10 +10,13 @@ Functions:
     - profile(request, username): Displays the details of a specific profile.
 """
 
-
+import logging
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseServerError
 from .models import Profile
+
+logger = logging.getLogger(__name__)
 
 
 # Sed placerat quam in pulvinar commodo. Nullam laoreet consectetur ex, sed consequat libero
@@ -32,8 +35,13 @@ def index(request):
     Returns:
         HttpResponse: The rendered index page with the list of profiles.
     """
-    # Retrieve all profile objects from the database
-    profiles_list = Profile.objects.all()
+    try:
+        # Attempt to retrieve  all profile objects from the database
+        profiles_list = Profile.objects.all()
+    except Exception as e:
+        # Log the error
+        logger.error('Error retrieving profiles from database: %s', e)
+        return HttpResponseServerError('Internal Server Error')
 
     # Prepare context data with profiles list
     context = {'profiles_list': profiles_list}
