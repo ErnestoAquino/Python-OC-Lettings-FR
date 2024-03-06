@@ -42,7 +42,7 @@ def test_letting_index_view_context_data(client):
                       zip_code=000000,
                       country_iso_code='TES')
     address.save()
-    letting = Letting.objects.create(title='Title Test', address=address)
+    Letting.objects.create(title='Title Test', address=address)
 
     expected_len_of_list = 1
     url = reverse('lettings:index')

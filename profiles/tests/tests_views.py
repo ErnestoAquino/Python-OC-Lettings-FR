@@ -1,11 +1,7 @@
 import pytest
 from django.contrib.auth.models import User
-from django.test import TestCase
 from django.urls import reverse
-from django.urls import resolve
 from profiles.models import Profile
-from profiles.views import profile as profile_view
-from profiles.views import index as index_view
 
 
 @pytest.mark.django_db

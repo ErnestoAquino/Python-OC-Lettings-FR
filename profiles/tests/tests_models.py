@@ -10,7 +10,7 @@ def test_profile_creation(client):
     """
     # Create user and profile
     user = User.objects.create_user(username='test_user', password='test_password123')
-    profile = Profile.objects.create(user=user, favorite_city='Test City')
+    Profile.objects.create(user=user, favorite_city='Test City')
 
     # Retrieve the profile from the database
     retrieved_profile = Profile.objects.get(user__username='test_user')
