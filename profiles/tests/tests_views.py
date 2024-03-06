@@ -1,6 +1,7 @@
 import pytest
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.db.utils import OperationalError
 from profiles.models import Profile
 
 
@@ -61,6 +62,23 @@ def test_index_view_with_no_profiles(client):
     # Check if 'profiles_list' is int the context and empty
     assert 'profiles_list' in response.context
     assert len(response.context['profiles_list']) == expected_len_of_list
+
+
+@pytest.mark.django_db
+def test_profile_index_view_database_error(mocker, client):
+    """
+    Test that the index view returns a server error response when a database error occurs
+    """
+
+    # 'Mock' the 'all()' method
+    mocker.patch.object(Profile.objects, 'all', side_effect=OperationalError)
+
+    # Make a GET request to the 'index' view
+    url = reverse('profiles:index')
+    response = client.get(url)
+
+    # Check that a server error response is returned
+    assert response.status_code == 500
 
 
 @pytest.mark.django_db
