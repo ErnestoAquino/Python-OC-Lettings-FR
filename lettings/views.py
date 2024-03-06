@@ -12,6 +12,7 @@ Functions:
 
 
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from .models import Letting
 
 
@@ -65,8 +66,8 @@ def letting(request, letting_id):
     Returns:
         HttpResponse: The rendered letting page with the letting details.
     """
-    # Retrieve the letting object with the given letting_id from the database
-    letting_instance = Letting.objects.get(id=letting_id)
+    # Use get_object_or_404 to automatically raise Http404 if the object is not found
+    letting_instance = get_object_or_404(Letting, id=letting_id)
 
     # Prepare context data with letting details
     context = {
