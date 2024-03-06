@@ -9,12 +9,15 @@ Functions:
     - index(request): Displays the index page with a list of all lettings.
     - letting(request, letting_id): Displays the details of a specific letting.
 """
-
-
+import logging
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseServerError
+
 from .models import Letting
 
+
+logger = logging.getLogger(__name__)
 
 # Create your views here. Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis
 # velit. Sed non placerat massa. Integer est nunc, pulvinar a tempor et, bibendum id arcu.
@@ -33,8 +36,13 @@ def index(request):
     Returns:
         HttpResponse: The rendered index page with the lettings list.
     """
-    # Retrieve all letting objects from the database
-    lettings_list = Letting.objects.all()
+    try:
+        # Attempt to retrieve all letting objects from the database
+        lettings_list = Letting.objects.all()
+    except Exception as e:
+        # Log the error
+        logger.error('Error retrieving lettings from database: %s', e)
+        return HttpResponseServerError('Internal Server Error')
 
     # Prepare context data to pass to the template
     context = {'lettings_list': lettings_list}
