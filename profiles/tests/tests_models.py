@@ -4,7 +4,7 @@ from profiles.models import Profile
 
 
 @pytest.mark.django_db
-def test_profile_creation(client):
+def test_profile_creation():
     """
     Test the creation and retrieval of a Profile instance
     """
