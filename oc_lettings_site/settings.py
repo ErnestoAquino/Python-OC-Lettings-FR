@@ -1,4 +1,5 @@
 import os
+import sentry_sdk
 
 from pathlib import Path
 
@@ -115,8 +116,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static", ]
 
-# settings.py
-import sentry_sdk
 
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN', ''),
