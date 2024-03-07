@@ -28,10 +28,9 @@ jobs:
     - name: Run flake8
       run: |
         flake8
-    - name: Run Tests
-      run: |
-        pytest
-    - name: Test coverage
+    - name: Run Tests and Coverage
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
         pytest --cov
         coverage report -m --fail-under=80
