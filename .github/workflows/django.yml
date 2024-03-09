@@ -43,3 +43,4 @@ jobs:
       run: |
         docker build -t eraquino/oc-lettings:${{ github.sha }} .
         docker push eraquino/oc-lettings:${{ github.sha }}
+        docker push eraquino/oc-lettings:latest
