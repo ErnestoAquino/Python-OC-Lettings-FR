@@ -50,8 +50,6 @@ jobs:
         docker push eraquino/oc-lettings:${{ github.sha }}
         docker push eraquino/oc-lettings:latest
     - name: Deploy
-      if: github.ref == 'ref/heads/master'
-      env:
-        deploy_url = ${{ secrets.RENDER_DEPLOY_HOOK }}
+      if: github.ref == 'refs/heads/master'
       run: |
-        curl 'deploy_url'
+        curl -X POST -d '' "${{ secrets.RENDER_DEPLOY_HOOK }}"
