@@ -16,7 +16,7 @@ from django.http import HttpResponseServerError
 
 from .models import Letting
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 
 # Create your views here. Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis

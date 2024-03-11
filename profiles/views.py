@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseServerError
 from .models import Profile
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 
 # Sed placerat quam in pulvinar commodo. Nullam laoreet consectetur ex, sed consequat libero
