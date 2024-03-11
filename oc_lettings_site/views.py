@@ -7,7 +7,10 @@ Function:
     - error_500(request): Renders a custom 500 error page.
 """
 
+import logging
 from django.shortcuts import render
+
+logger = logging.getLogger('django')
 
 
 # Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie quam lobortis leo
@@ -40,6 +43,7 @@ def error_404(request, exception):
     Returns:
     - HttpResponse: The response object with the rendered '404.html' template and 404 status code.
     """
+    logger.error(f'404 error: {request.path} caused by {exception}')
     return render(request, '404.html', {}, status=404)
 
 
