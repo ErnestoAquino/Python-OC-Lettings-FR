@@ -69,6 +69,7 @@ def test_profile_index_view_database_error(mocker, client):
     """
     Test that the index view returns a server error response when a database error occurs
     """
+    mock_logger_error = mocker.patch('logging.Logger.error')
 
     # 'Mock' the 'all()' method
     mocker.patch.object(Profile.objects, 'all', side_effect=OperationalError)
@@ -79,6 +80,7 @@ def test_profile_index_view_database_error(mocker, client):
 
     # Check that a server error response is returned
     assert response.status_code == 500
+    mock_logger_error.assert_called()
 
 
 @pytest.mark.django_db
@@ -158,12 +160,15 @@ def test_profile_view_context_data(client):
 
 
 @pytest.mark.django_db
-def test_profile_view_with_nonexistent_username(client):
+def test_profile_view_with_nonexistent_username(mocker, client):
     """
     Test that the profile view returns a 404 error for a nonexistent username.
     """
+    mock_logger_error = mocker.patch('logging.Logger.error')
+
     expected_status_code = 404
     url = reverse('profiles:profile', kwargs={'username': 'nonexistent'})
     response = client.get(url)
 
     assert response.status_code == expected_status_code
+    mock_logger_error.assert_called()

@@ -101,6 +101,7 @@ def test_lettings_index_view_database_error(mocker, client):
     """
     Test that the letting index view returns a server error response when a database error occurs
     """
+    mock_logger_error = mocker.patch('logging.Logger.error')
 
     # 'Mock' the 'all()' method
     mocker.patch.object(Letting.objects, 'all', side_effect=OperationalError)
@@ -111,6 +112,7 @@ def test_lettings_index_view_database_error(mocker, client):
 
     # Check that the server error response is returned
     assert response.status_code == 500
+    mock_logger_error.assert_called()
 
 
 @pytest.mark.django_db
@@ -184,13 +186,16 @@ def test_letting_view_context_data(client):
 
 
 @pytest.mark.django_db
-def test_letting_view_with_nonexistent_letting_id(client):
+def test_letting_view_with_nonexistent_letting_id(mocker, client):
     """
     Test that the profile view returns a 404 error for nonexistent letting
     """
+
+    mock_logger_error = mocker.patch('logging.Logger.error')
 
     expected_status_code = 404
     url = reverse('lettings:letting', kwargs={'letting_id': 100})
     response = client.get(url)
 
     assert response.status_code == expected_status_code
+    mock_logger_error.assert_called()
