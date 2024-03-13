@@ -8,3 +8,4 @@ env/
 *.log
 .env
 staticfiles/
+_build/
