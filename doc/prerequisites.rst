@@ -7,7 +7,7 @@ Prerequisites
 - A GitHub account with read access to this repository
 - Git CLI
 - SQLite3 CLI
-- Python interpreter, version 3.8 or higher
+- Python interpreter, version 3.9 or higher
 - The Django secret key
 - The DSN for Sentry
 
