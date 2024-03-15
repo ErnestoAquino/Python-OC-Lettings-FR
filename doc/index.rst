@@ -10,10 +10,11 @@ Welcome to Oc-lettings documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   technologies
    prerequisites
    local_development
    docker_usage_in_the_project
    ci_cd_with_github_actions
    deployment_in_render
    sentry_and_logging
-
+   database_structure
