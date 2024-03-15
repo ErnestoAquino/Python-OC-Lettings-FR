@@ -62,4 +62,3 @@ jobs:
     - name: Deploy to Render
       run: |
         curl -X POST -d '' "${{ secrets.RENDER_DEPLOY_HOOK }}"
-
